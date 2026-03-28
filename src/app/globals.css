@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* ── Brand colors ── */
+  --color-cream: #F5F0E8;
+  --color-cream-dark: #EDE5D8;
+  --color-brown-900: #3D1F0E;
+  --color-brown-700: #6B3A25;
+  --color-brown-500: #9B6B4E;
+  --color-brown-300: #C4A882;
+  --color-brown-100: #E8DFD0;
+  --color-brown-50: #F2EDE4;
+
+  /* ── Semantic tokens ── */
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-brown-900);
+  --color-card: #FFFFFF;
+  --color-card-foreground: var(--color-brown-900);
+  --color-primary: var(--color-brown-900);
+  --color-primary-foreground: var(--color-cream);
+  --color-secondary: var(--color-brown-100);
+  --color-secondary-foreground: var(--color-brown-900);
+  --color-muted: var(--color-brown-50);
+  --color-muted-foreground: var(--color-brown-500);
+  --color-accent: var(--color-brown-100);
+  --color-accent-foreground: var(--color-brown-900);
+  --color-border: var(--color-brown-100);
+  --color-input: var(--color-brown-100);
+  --color-ring: var(--color-brown-700);
+
+  /* ── Radius ── */
+  --radius: 0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* ── Typography ── */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
+
+  /* ── Spacing extras ── */
+  --container-max: 1280px;
+  --section-py: 5rem;
+}
+
+/* ── Base styles ── */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-brown-900);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: var(--color-brown-300);
+    color: var(--color-brown-900);
+  }
+}
+
+/* ── Utilities ── */
+@layer utilities {
+  .container-site {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-site {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-site {
+      padding-inline: 2rem;
+    }
+  }
+
+  .section-py {
+    padding-top: var(--section-py);
+    padding-bottom: var(--section-py);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+}
