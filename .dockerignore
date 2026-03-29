@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.github
+.env
+.env.*
+!.env.example
+public/uploads
+scripts
+*.log
+*.md
+.mcp.json
