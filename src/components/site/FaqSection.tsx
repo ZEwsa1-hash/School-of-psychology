@@ -30,14 +30,14 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <section className="section-py bg-[#F5F0E8]">
+    <section className="section-py bg-[#F3F2EE]">
       <div className="container-site">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="text-sm font-medium text-[#9B6B4E] uppercase tracking-widest mb-3">
-              FAQ
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl text-[#3D1F0E] text-balance">
+        <div className="max-w-[917px] mx-auto">
+          <div className="text-center mb-10">
+            <h2
+              className="text-[48px] leading-[100%] tracking-[0%] text-[#2E1700]"
+              style={{ fontFamily: 'var(--font-muller)', fontWeight: 400 }}
+            >
               Часто задаваемые вопросы
             </h2>
           </div>
@@ -47,12 +47,19 @@ export function FaqSection() {
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
-                className="bg-white rounded-xl border border-[#E8DFD0] px-6 data-[state=open]:border-[#C4A882]"
+                className="w-full bg-white rounded-[10px] border-none px-6"
+                style={{ boxShadow: '0px 4px 17px 0px #00000040' }}
               >
-                <AccordionTrigger className="text-left text-[#3D1F0E] font-medium hover:no-underline py-5 [&[data-state=open]>svg]:text-[#6B3A25]">
+                <AccordionTrigger
+                  className="text-left text-[#2E1700] hover:no-underline min-h-[44px] py-0 leading-[100%] tracking-[0%] data-[state=open]:text-[#000000] data-[state=open]:text-[13px] [&[data-state=open]>svg]:text-[#6B3A25]"
+                  style={{ fontFamily: 'var(--font-muller)', fontWeight: 400, fontSize: '16px' }}
+                >
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-[#9B6B4E] leading-relaxed pb-5">
+                <AccordionContent
+                  className="text-[#000000] leading-[100%] pb-4"
+                  style={{ fontFamily: 'var(--font-muller)', fontWeight: 400, fontSize: '16px' }}
+                >
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

@@ -1,47 +1,103 @@
-import { Award, GraduationCap } from 'lucide-react'
+'use client'
 
-const certificates = [
-  {
-    icon: Award,
-    title: 'Свидетельство',
-    description: 'Выдаётся по окончании базовых и специализированных курсов продолжительностью от 72 часов.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Диплом о профессиональной переподготовке',
-    description: 'Выдаётся по программам профессиональной переподготовки объёмом от 250 часов.',
-  },
-]
+import { useState, useEffect, useRef, type CSSProperties } from 'react'
+import Image from 'next/image'
+
+// chars × speed = total duration; steps = char count
+const CERT_CHARS = 10  // "Сертификат"
+const DIPL_CHARS = 6   // "Диплом"
+const MS_PER_CHAR = 40
+
+function typewriterStyle(chars: number, visible: boolean): CSSProperties {
+  if (!visible) {
+    return { display: 'inline-block', clipPath: 'inset(0 100% 0 0)' }
+  }
+  return {
+    display: 'inline-block',
+    animation: `typewriter ${chars * MS_PER_CHAR}ms steps(${chars}, end) both`,
+  }
+}
 
 export function CertificatesSection() {
-  return (
-    <section className="section-py bg-[#3D1F0E]">
-      <div className="container-site">
-        <div className="text-center mb-12">
-          <p className="text-sm font-medium text-[#C4A882] uppercase tracking-widest mb-3">
-            Документы
-          </p>
-          <h2 className="font-serif text-4xl md:text-5xl text-[#F5F0E8] text-balance">
-            Документы об образовании
-          </h2>
-        </div>
+  const ref = useRef<HTMLElement>(null)
+  const [visible, setVisible] = useState(false)
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          {certificates.map(cert => {
-            const Icon = cert.icon
-            return (
-              <div
-                key={cert.title}
-                className="bg-[#6B3A25] bg-opacity-40 border border-[#6B3A25] rounded-2xl p-8 text-center space-y-4"
-              >
-                <div className="w-16 h-16 rounded-full bg-[#6B3A25] flex items-center justify-center mx-auto">
-                  <Icon size={28} className="text-[#F5F0E8]" />
-                </div>
-                <h3 className="font-serif text-2xl text-[#F5F0E8]">{cert.title}</h3>
-                <p className="text-[#C4A882] text-sm leading-relaxed">{cert.description}</p>
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0, rootMargin: '0px 0px -60px 0px' }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <section ref={ref} className="bg-[#F3F2EE] py-16 md:py-24">
+      <div className="container-site">
+        <div className="flex flex-col md:flex-row items-stretch">
+
+          {/* Left: certificate image top, text bottom */}
+          <div className="flex-1 flex flex-col justify-between gap-10 pr-0 md:pr-12 pb-12 md:pb-0">
+            <div className="relative w-full max-w-[400px] mx-auto md:mx-0 aspect-[362/261]">
+              <div className="absolute inset-0 border border-[#2C2A26] rounded-sm overflow-hidden shadow-md">
+                <Image
+                  src="/assets/certificate.png"
+                  alt="Сертификат"
+                  fill
+                  sizes="(max-width: 768px) 90vw, 400px"
+                  className="object-cover"
+                />
               </div>
-            )
-          })}
+            </div>
+
+            <p className="text-[15px] text-[#1C1A17] leading-[1.75] text-justify max-w-[380px]">
+              <span className="font-bold" style={typewriterStyle(CERT_CHARS, visible)}>
+                Сертификат
+              </span>{' '}
+              выдаётся после прохождения
+              краткосрочных программ, интенсивов и
+              отдельных курсов. Он подтверждает участие и
+              освоение материала
+            </p>
+          </div>
+
+          {/* Vertical dashed divider */}
+          <div className="hidden md:block w-px border-l border-dashed border-[#B0A99A] self-stretch mx-0" />
+
+          {/* Right: diploma image left + text right */}
+          <div className="flex-1 flex flex-col md:flex-row items-start gap-8 pl-0 md:pl-12 pt-12 md:pt-0">
+            <div className="relative w-full max-w-[240px] mx-auto md:mx-0 flex-shrink-0 aspect-[286/399]">
+              <div className="absolute inset-0 border border-[#2C2A26] rounded-sm overflow-hidden shadow-md">
+                <Image
+                  src="/assets/diploma.png"
+                  alt="Диплом"
+                  fill
+                  sizes="(max-width: 768px) 70vw, 240px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            <p className="text-[15px] text-[#1C1A17] leading-[1.75] text-justify flex-1 md:pt-4">
+              <span className="font-bold" style={typewriterStyle(DIPL_CHARS, visible)}>
+                Диплом
+              </span>{' '}
+              получают студенты, успешно
+              завершившие полноценную образовательную
+              программу академии и выполнившие все итоговые
+              задания. Такой документ подтверждает более
+              глубокую подготовку и комплексные знания в
+              области психологии
+            </p>
+          </div>
+
         </div>
       </div>
     </section>

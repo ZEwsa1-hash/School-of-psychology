@@ -1,9 +1,16 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { siteConfig } from '@/config/site'
+
+const socials = [
+  { href: '#', icon: '/icons/vk.png', label: 'ВКонтакте' },
+  { href: '#', icon: '/icons/instagram.png', label: 'Instagram' },
+  { href: '#', icon: '/icons/telegram.png', label: 'Telegram' },
+]
 
 export function Footer() {
   return (
-    <footer className="bg-[#3D1F0E] text-[#F5F0E8]">
+    <footer className="bg-[#2E1700] text-[#F4F3EF]">
       <div className="container-site py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
@@ -15,29 +22,18 @@ export function Footer() {
             <p className="text-sm text-[#C4A882]">
               Профессиональное образование в области психологии от ведущих специалистов
             </p>
-            {/* Social */}
+            {/* Social icons */}
             <div className="flex items-center gap-3 pt-1">
-              <a
-                href="#"
-                aria-label="ВКонтакте"
-                className="w-8 h-8 rounded-full border border-[#6B3A25] flex items-center justify-center text-xs hover:bg-[#6B3A25] transition-colors"
-              >
-                VK
-              </a>
-              <a
-                href="#"
-                aria-label="Instagram"
-                className="w-8 h-8 rounded-full border border-[#6B3A25] flex items-center justify-center text-xs hover:bg-[#6B3A25] transition-colors"
-              >
-                IG
-              </a>
-              <a
-                href="#"
-                aria-label="Telegram"
-                className="w-8 h-8 rounded-full border border-[#6B3A25] flex items-center justify-center text-xs hover:bg-[#6B3A25] transition-colors"
-              >
-                TG
-              </a>
+              {socials.map(({ href, icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="w-10 h-10 rounded-full border border-[#6B3A25] flex items-center justify-center hover:bg-[#6B3A25] transition-colors overflow-hidden"
+                >
+                  <Image src={icon} alt={label} width={20} height={20} className="object-contain" />
+                </a>
+              ))}
             </div>
           </div>
 
