@@ -14,21 +14,14 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const [courses, teachers] = await Promise.all([
-    prisma.course.findMany({
-      where: { published: true },
-      include: { teacher: true },
-      orderBy: { sortOrder: 'asc' },
-    }),
-    prisma.teacher.findMany({
-      orderBy: { sortOrder: 'asc' },
-    }),
-  ])
+  const teachers = await prisma.teacher.findMany({
+    orderBy: { sortOrder: 'asc' },
+  })
 
   return (
     <>
       <HeroSection />
-      <CoursesSection courses={courses} />
+      <CoursesSection />
       <AboutSection />
       <TeachersSection teachers={teachers} />
       <CertificatesSection />
