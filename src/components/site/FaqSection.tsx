@@ -35,14 +35,14 @@ export function FaqSection() {
         <div className="max-w-[917px] mx-auto">
           <div className="text-center mb-10">
             <h2
-              className="text-[48px] leading-[100%] tracking-[0%] text-[#2E1700]"
+              className="text-[32px] md:text-[48px] leading-[110%] tracking-[0%] text-[#2E1700]"
               style={{ fontFamily: 'var(--font-muller)', fontWeight: 400 }}
             >
               Часто задаваемые вопросы
             </h2>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-2">
+          <Accordion type="single" collapsible className="flex flex-col gap-[5px] md:gap-[10px]">
             {faqs.map((faq, i) => (
               <AccordionItem
                 key={i}
@@ -51,13 +51,13 @@ export function FaqSection() {
                 style={{ boxShadow: '0px 4px 17px 0px #00000040' }}
               >
                 <AccordionTrigger
-                  className="text-left text-[#2E1700] hover:no-underline min-h-[44px] py-0 leading-[100%] tracking-[0%] data-[state=open]:text-[#000000] data-[state=open]:text-[13px] [&[data-state=open]>svg]:text-[#6B3A25]"
+                  className="text-left text-[#2E1700] hover:no-underline min-h-[49px] md:min-h-[44px] py-0 leading-[100%] tracking-[0%] data-[state=open]:text-[#000000] data-[state=open]:text-[13px] [&[data-state=open]>svg]:text-[#6B3A25]"
                   style={{ fontFamily: 'var(--font-muller)', fontWeight: 400, fontSize: '16px' }}
                 >
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent
-                  className="text-[#000000] leading-[100%] pb-4"
+                  className="text-[#000000] leading-[100%] pb-4 mt-[7px] md:mt-0"
                   style={{ fontFamily: 'var(--font-muller)', fontWeight: 400, fontSize: '16px' }}
                 >
                   {faq.answer}

@@ -89,7 +89,8 @@ export function AboutSection() {
 
         {/* ── Mobile: vertical stack ── */}
         <div className="lg:hidden flex flex-col gap-8">
-          <div className="relative w-full aspect-[4/3] rounded-[20px] overflow-hidden">
+          {/* 1. Building image: 350×343 */}
+          <div className="relative w-full h-[343px] rounded-[20px] overflow-hidden">
             <Image
               src="/assets/about-building.png"
               alt="Кафедра психологии"
@@ -99,6 +100,7 @@ export function AboutSection() {
             />
           </div>
 
+          {/* 2. О нас text */}
           <div>
             <h2 className="font-serif text-2xl text-[#2E1700] mb-4">О нас</h2>
             <div className="space-y-4 text-[#2E1700] text-base leading-relaxed">
@@ -108,6 +110,18 @@ export function AboutSection() {
             </div>
           </div>
 
+          {/* 3. Lecture image: 210×349, right-aligned */}
+          <div className="relative h-[349px] w-[210px] rounded-[20px] overflow-hidden ml-auto">
+            <Image
+              src="/assets/about-lecture.jpg"
+              alt="Лекционный зал"
+              fill
+              sizes="210px"
+              className="object-cover"
+            />
+          </div>
+
+          {/* 4. Почему выбирают нас */}
           <div>
             <h2 className="font-serif text-2xl text-[#2E1700] mb-4">Почему выбирают нас</h2>
             <hr className="border-[#3D1F0E] mb-6" />
@@ -121,16 +135,6 @@ export function AboutSection() {
                 <p className="text-sm text-[#2E1700] leading-relaxed">Мы сопровождаем вас на каждом этапе обучения и помогаем прийти к результату&nbsp;&mdash; будь то новая профессия или личные изменения.</p>
               </div>
             </div>
-          </div>
-
-          <div className="relative w-full aspect-[3/4] rounded-[20px] overflow-hidden">
-            <Image
-              src="/assets/about-lecture.jpg"
-              alt="Лекционный зал"
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
           </div>
         </div>
 

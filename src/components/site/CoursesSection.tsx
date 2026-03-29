@@ -135,8 +135,8 @@ function GoalCard({ course, animationDelay = 0, animated = false }: GoalCardProp
     >
       <Link href={`/courses/${course.slug}`} className="block group cursor-pointer">
         <article
-          className="bg-white border border-[#E8E8E8] rounded-[10px] overflow-hidden flex flex-col hover:border-[#C4A882] hover:shadow-md transition-colors"
-          style={{ height: 299, maxWidth: 392 }}
+          className="bg-white border border-[#E8E8E8] rounded-[10px] overflow-hidden flex flex-col hover:border-[#C4A882] hover:shadow-md transition-colors h-[269px] lg:h-[299px]"
+          style={{ maxWidth: 392 }}
         >
           {/* Top section: title at top:42px + illustration */}
           <div className="relative flex-1 overflow-hidden">
@@ -257,11 +257,11 @@ export function CoursesSection({ title = 'Выберите цель прохож
           </h2>
         </div>
 
-        {/* Filters */}
+        {/* Filters — horizontal scroll on mobile, wrap on desktop */}
         <div
           ref={filtersRef}
           className={cn(
-            'flex flex-wrap gap-2 mb-10 transition-all duration-700 ease-out',
+            'flex gap-2 mb-10 overflow-x-auto scrollbar-hide pb-1 md:pb-0 md:flex-wrap transition-all duration-700 ease-out',
             filtersVisible
               ? 'opacity-100 translate-y-0 blur-0'
               : 'opacity-0 translate-y-5 blur-sm'
@@ -272,9 +272,9 @@ export function CoursesSection({ title = 'Выберите цель прохож
               key={f}
               onClick={() => setActiveFilter(f)}
               className={cn(
-                'px-5 py-2.5 rounded-full text-sm font-medium transition-colors border',
+                'flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-colors border',
                 activeFilter === f
-                  ? 'bg-[#5B3E2B] text-[#F4F3EF] border-[#5B3E2B]'
+                  ? 'bg-[#2E1700] text-[#F4F3EF] border-[#2E1700]'
                   : 'bg-white text-[#2E1700] border-[#E8DFD0] hover:border-[#C4A882]'
               )}
             >

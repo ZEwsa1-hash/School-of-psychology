@@ -1,20 +1,15 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Checkbox } from '@/components/ui/checkbox'
 import { createContactRequest } from '@/app/actions/contact'
 
 const schema = z.object({
   name: z.string().min(2, 'Введите имя'),
   phone: z.string().min(10, 'Введите телефон'),
-  message: z.string().optional(),
   consent: z.boolean().refine(v => v === true, 'Необходимо ваше согласие'),
 })
 
@@ -24,7 +19,13 @@ export function ContactForm() {
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: { consent: false },
   })
@@ -36,7 +37,6 @@ export function ContactForm() {
     await createContactRequest({
       name: data.name,
       phone: data.phone,
-      message: data.message,
     })
     setLoading(false)
     setSent(true)
@@ -44,14 +44,14 @@ export function ContactForm() {
 
   if (sent) {
     return (
-      <section className="section-py bg-white">
-        <div className="container-site">
+      <section className="py-16 md:py-24 bg-[#F4F3EF]">
+        <div className="container-site max-w-[1440px]">
           <div className="max-w-lg mx-auto text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-[#F5F0E8] flex items-center justify-center mx-auto">
-              <span className="font-serif text-3xl text-[#3D1F0E]">✓</span>
+            <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mx-auto shadow">
+              <span className="font-serif text-3xl text-[#2E1700]">✓</span>
             </div>
-            <h2 className="font-serif text-3xl text-[#3D1F0E]">Заявка отправлена!</h2>
-            <p className="text-[#9B6B4E]">Мы свяжемся с вами в ближайшее время.</p>
+            <h2 className="font-serif text-3xl text-[#2E1700]">Заявка отправлена!</h2>
+            <p className="text-[#2E1700]/60">Мы свяжемся с вами в ближайшее время.</p>
           </div>
         </div>
       </section>
@@ -59,82 +59,83 @@ export function ContactForm() {
   }
 
   return (
-    <section className="section-py bg-white">
-      <div className="container-site">
-        <div className="max-w-lg mx-auto">
-          <div className="text-center mb-10">
-            <p className="text-sm font-medium text-[#9B6B4E] uppercase tracking-widest mb-3">
-              Контакты
-            </p>
-            <h2 className="font-serif text-4xl text-[#3D1F0E] text-balance">
-              Нужна помощь в подборе курса?
-            </h2>
-            <p className="mt-3 text-[#9B6B4E]">
-              Оставьте заявку, и мы поможем выбрать подходящую программу
-            </p>
+    <section className="py-16 md:py-24 bg-[#F4F3EF]">
+      <div className="container-site max-w-[1440px]">
+        <div className="flex flex-col md:flex-row gap-[34px] md:gap-6 items-stretch">
+
+          {/* Left block — image (hidden on mobile) */}
+          <div className="hidden md:block w-full md:max-w-[542px] md:flex-shrink-0">
+            <div className="relative w-full rounded-[20px] overflow-hidden" style={{ aspectRatio: '542 / 433' }}>
+              <Image
+                src="/assets/contact-brain.png"
+                alt="Подбор курса"
+                fill
+                sizes="(max-width: 768px) 100vw, 542px"
+                className="object-cover"
+              />
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="space-y-1">
-              <Label htmlFor="name" className="text-[#3D1F0E]">Имя</Label>
-              <Input
-                id="name"
-                placeholder="Иван Иванов"
+          {/* Right block — form card */}
+          <div
+            className="flex-1 h-[329px] md:h-auto md:min-h-[433px] rounded-[20px] bg-white px-10 py-10 flex flex-col justify-center"
+            style={{ boxShadow: '0px 4px 32.2px 0px #00000040' }}
+          >
+            <h2 className="font-serif text-[32px] md:text-[40px] leading-tight text-[#2E1700] mb-6">
+              Нужна помощь в подборе курса?
+            </h2>
+
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {/* Name input */}
+              <input
+                type="text"
+                placeholder="Имя"
                 {...register('name')}
-                className="border-[#E8DFD0] bg-[#F5F0E8] focus-visible:ring-[#3D1F0E]"
+                className="w-full bg-[#F4F3EF] border border-[#E8DFD0] rounded-[10px] px-4 py-3 text-[#2E1700] placeholder-[#2E1700]/40 outline-none focus:border-[#2E1700] transition-colors"
               />
-              {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
-            </div>
+              {errors.name && (
+                <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>
+              )}
 
-            <div className="space-y-1">
-              <Label htmlFor="phone" className="text-[#3D1F0E]">Телефон</Label>
-              <Input
-                id="phone"
+              {/* Phone input */}
+              <input
                 type="tel"
-                placeholder="+7 (999) 000-00-00"
+                placeholder="+ 375 (00) 000 00 00"
                 {...register('phone')}
-                className="border-[#E8DFD0] bg-[#F5F0E8] focus-visible:ring-[#3D1F0E]"
+                className="w-full bg-[#F4F3EF] border border-[#E8DFD0] rounded-[10px] px-4 py-3 text-[#2E1700] placeholder-[#2E1700]/40 outline-none focus:border-[#2E1700] transition-colors mt-3"
               />
-              {errors.phone && <p className="text-sm text-red-500">{errors.phone.message}</p>}
-            </div>
+              {errors.phone && (
+                <p className="text-sm text-red-500 mt-1">{errors.phone.message}</p>
+              )}
 
-            <div className="space-y-1">
-              <Label htmlFor="message" className="text-[#3D1F0E]">
-                Сообщение <span className="text-[#9B6B4E] font-normal">(необязательно)</span>
-              </Label>
-              <Textarea
-                id="message"
-                placeholder="Расскажите, какой курс вас интересует..."
-                rows={3}
-                {...register('message')}
-                className="border-[#E8DFD0] bg-[#F5F0E8] focus-visible:ring-[#3D1F0E] resize-none"
-              />
-            </div>
+              {/* Consent checkbox */}
+              <div className="flex items-center gap-3 mt-4">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  checked={consent}
+                  onChange={e => setValue('consent', e.target.checked)}
+                  className="w-4 h-4 accent-[#2E1700] cursor-pointer flex-shrink-0"
+                />
+                <label htmlFor="consent" className="text-sm text-[#2E1700] cursor-pointer leading-snug">
+                  Даю согласие на обработку персональных данных
+                </label>
+              </div>
+              {errors.consent && (
+                <p className="text-sm text-red-500 mt-1">{errors.consent.message}</p>
+              )}
 
-            <div className="flex items-start gap-3">
-              <Checkbox
-                id="consent"
-                checked={consent}
-                onCheckedChange={v => setValue('consent', v === true)}
-                className="mt-0.5 border-[#C4A882] data-[state=checked]:bg-[#3D1F0E] data-[state=checked]:border-[#3D1F0E]"
-              />
-              <label htmlFor="consent" className="text-sm text-[#9B6B4E] cursor-pointer leading-relaxed">
-                Я согласен с{' '}
-                <a href="/privacy" className="text-[#3D1F0E] hover:underline">
-                  политикой обработки персональных данных
-                </a>
-              </label>
-            </div>
-            {errors.consent && <p className="text-sm text-red-500">{errors.consent.message}</p>}
+              {/* Submit button */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full mt-6 h-12 bg-[#2E1700] hover:bg-[#6B3A25] text-white rounded-[10px] text-base font-medium transition-colors disabled:opacity-60"
+              >
+                {loading ? 'Отправка...' : 'Оставить заявку'}
+              </button>
+            </form>
+          </div>
 
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-[#3D1F0E] hover:bg-[#6B3A25] text-[#F5F0E8] h-12 text-base"
-            >
-              {loading ? 'Отправка...' : 'Оставить заявку'}
-            </Button>
-          </form>
         </div>
       </div>
     </section>

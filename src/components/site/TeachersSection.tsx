@@ -19,7 +19,7 @@ function TeacherCard({ teacher }: { teacher: Teacher }) {
             src={teacher.photo}
             alt={teacher.name}
             fill
-            sizes="(max-width: 768px) 50vw, 25vw"
+            sizes="(max-width: 768px) 48vw, 25vw"
             className="object-cover object-top"
           />
         ) : (
@@ -85,7 +85,17 @@ export function TeachersSection({ teachers }: TeachersSectionProps) {
           Преподаватели
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+        {/* Mobile: touch-scrollable horizontal carousel */}
+        <div className="md:hidden flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2">
+          {teachers.map(teacher => (
+            <div key={teacher.id} className="flex-shrink-0 w-[56vw] snap-start">
+              <TeacherCard teacher={teacher} />
+            </div>
+          ))}
+        </div>
+
+        {/* Tablet / Desktop: grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {teachers.map(teacher => (
             <TeacherCard key={teacher.id} teacher={teacher} />
           ))}
