@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export function HeroSection() {
   return (
     <section className="bg-[#F4F3EF]">
@@ -7,11 +9,14 @@ export function HeroSection() {
         </h1>
 
         <div className="relative w-full h-[343px] md:h-[361px] rounded-[20px] overflow-hidden bg-[#C8B89A]">
-          <img
+          <Image
             src="/assets/hero-image.png"
             alt="Академия психологии и психотерапии"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
             style={{ objectPosition: 'center -15px' }}
+            priority
+            sizes="(max-width: 768px) 100vw, 1440px"
           />
         </div>
       </div>

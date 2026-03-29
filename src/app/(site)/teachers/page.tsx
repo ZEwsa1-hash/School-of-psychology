@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
-import { TeachersSection } from '@/components/site/TeachersSection'
 import { User } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -31,12 +31,14 @@ export default async function TeachersPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {teachers.map(teacher => (
               <article key={teacher.id} className="flex gap-6 p-6 bg-[#F5F0E8] rounded-2xl">
-                <div className="w-24 h-24 rounded-2xl bg-[#E8DFD0] flex items-center justify-center shrink-0 grayscale">
+                <div className="relative w-24 h-24 rounded-2xl bg-[#E8DFD0] flex items-center justify-center shrink-0 grayscale overflow-hidden">
                   {teacher.photo ? (
-                    <img
+                    <Image
                       src={teacher.photo}
                       alt={teacher.name}
-                      className="w-full h-full object-cover rounded-2xl"
+                      fill
+                      className="object-cover"
+                      sizes="96px"
                     />
                   ) : (
                     <User size={36} className="text-[#C4A882]" />

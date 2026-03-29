@@ -4,7 +4,6 @@ import { Clock, User } from 'lucide-react'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { redirect } from 'next/navigation'
-import { Badge } from '@/components/ui/badge'
 import { formatDate } from '@/lib/utils'
 
 export const metadata: Metadata = { title: 'Мои курсы — Личный кабинет' }
