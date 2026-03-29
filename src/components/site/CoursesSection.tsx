@@ -1,133 +1,281 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { Clock, ArrowRight } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import Image from 'next/image'
+import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-type Course = {
+type PriceOption = {
+  duration: string
+  price: string
+}
+
+type GoalCourse = {
   id: string
   slug: string
   title: string
-  description: string
-  price: number
-  duration: string
   imageUrl: string | null
-  teacher: { name: string; specialization: string } | null
+  badges: string[]
+  options: PriceOption[]
 }
 
-const filters = ['Все', 'КПТ', 'Психоанализ', 'Семейная терапия', 'Экзистенциальная']
+const GOAL_COURSES: GoalCourse[] = [
+  {
+    id: '1',
+    slug: 'psihosomatika',
+    title: 'Психосоматика и телесно-ориентированная терапия',
+    imageUrl: null,
+    badges: ['диплом', 'онлайн', 'оффлайн'],
+    options: [
+      { duration: '9 Месяцев / 1000 часов', price: '500$' },
+      { duration: '15 Месяцев / 1740 часов', price: '700$' },
+    ],
+  },
+  {
+    id: '2',
+    slug: 'psiholog-kouch',
+    title: 'Профессия Психолог-коуч',
+    imageUrl: '/courses/goal-1.png',
+    badges: ['диплом', 'оффлайн'],
+    options: [
+      { duration: '9 Месяцев / 1000 часов', price: '500$' },
+      { duration: '15 Месяцев / 1740 часов', price: '700$' },
+    ],
+  },
+  {
+    id: '3',
+    slug: 'povyshenie-kvalifikacii',
+    title: 'Онлайн-курсы повышения квалификации психологов',
+    imageUrl: '/courses/goal-5.png',
+    badges: ['диплом', 'онлайн'],
+    options: [
+      { duration: '9 Месяцев / 1000 часов', price: '500$' },
+      { duration: '15 Месяцев / 1740 часов', price: '700$' },
+    ],
+  },
+  {
+    id: '4',
+    slug: 'psihologiya-semeynyh-otnosheniy',
+    title: 'Полный онлайн-курс психологии семейных отношений',
+    imageUrl: '/courses/goal-4.png',
+    badges: ['диплом', 'онлайн', 'оффлайн'],
+    options: [
+      { duration: '9 Месяцев / 1000 часов', price: '500$' },
+      { duration: '15 Месяцев / 1740 часов', price: '700$' },
+    ],
+  },
+  {
+    id: '5',
+    slug: 'emocionalnyy-intellekt',
+    title: 'Онлайн-курсы эмоционального интеллекта',
+    imageUrl: '/courses/goal-3.png',
+    badges: ['диплом', 'онлайн', 'оффлайн'],
+    options: [
+      { duration: '9 Месяцев / 1000 часов', price: '500$' },
+      { duration: '15 Месяцев / 1740 часов', price: '700$' },
+    ],
+  },
+  {
+    id: '6',
+    slug: 'trevoga-i-panicheskie-ataki',
+    title: 'Курсы по работе с тревогой и паническими атаками',
+    imageUrl: '/courses/goal-2.png',
+    badges: ['диплом', 'онлайн', 'оффлайн'],
+    options: [
+      { duration: '9 Месяцев / 1000 часов', price: '500$' },
+      { duration: '15 Месяцев / 1740 часов', price: '700$' },
+    ],
+  },
+]
 
-function formatPrice(kopecks: number): string {
-  return new Intl.NumberFormat('ru-RU', {
-    style: 'currency',
-    currency: 'RUB',
-    maximumFractionDigits: 0,
-  }).format(kopecks / 100)
+const filters = ['Все курсы', 'Переподготовка', 'Повышение квалификации', 'Курсы по направлениям', 'Профессия']
+
+interface GoalCardProps {
+  course: GoalCourse
+  /** Delay for the blur-reveal entrance animation (ms) */
+  animationDelay?: number
+  /** Whether the card should animate (second row) */
+  animated?: boolean
 }
 
-function CourseCard({ course }: { course: Course }) {
+function GoalCard({ course, animationDelay = 0, animated = false }: GoalCardProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(!animated)
+
+  useEffect(() => {
+    if (!animated) return
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Small delay per card for stagger effect
+          setTimeout(() => setVisible(true), animationDelay)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.15 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [animated, animationDelay])
+
+  const [diploma, ...rest] = course.badges
+
   return (
-    <article className="bg-white rounded-2xl overflow-hidden border border-[#E8DFD0] hover:border-[#C4A882] hover:shadow-md transition-all group">
-      {/* Image */}
-      <div className="relative aspect-[4/3] bg-[#F5F0E8] overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-serif text-7xl text-[#E8DFD0] group-hover:scale-110 transition-transform">
-            Ψ
-          </span>
-        </div>
-        {course.teacher && (
-          <div className="absolute top-3 left-3">
-            <Badge className="bg-[#3D1F0E] text-[#F5F0E8] text-xs border-0 rounded-full px-3">
-              {course.teacher.specialization.split(' ')[0]}
-            </Badge>
-          </div>
-        )}
-      </div>
-
-      <div className="p-5 space-y-3">
-        <h3 className="font-serif text-xl text-[#3D1F0E] leading-snug line-clamp-2">
-          {course.title}
-        </h3>
-        <p className="text-sm text-[#9B6B4E] leading-relaxed line-clamp-2">
-          {course.description}
-        </p>
-
-        <div className="flex items-center justify-between pt-1">
-          <div className="flex items-center gap-3 text-xs text-[#9B6B4E]">
-            <span className="flex items-center gap-1">
-              <Clock size={12} />
-              {course.duration}
-            </span>
-          </div>
-          <span className="font-medium text-[#3D1F0E] text-sm">
-            {formatPrice(course.price)}
-          </span>
-        </div>
-
-        {course.teacher && (
-          <p className="text-xs text-[#9B6B4E] border-t border-[#F5F0E8] pt-3">
-            Преподаватель: {course.teacher.name}
-          </p>
-        )}
-
-        <Button
-          asChild
-          variant="ghost"
-          className="w-full justify-between text-[#3D1F0E] hover:bg-[#F5F0E8] border border-[#E8DFD0] mt-1 h-9"
+    <div
+      ref={ref}
+      className={cn(
+        'transition-all duration-700 ease-out',
+        animated && !visible
+          ? 'opacity-0 blur-md translate-y-4'
+          : 'opacity-100 blur-0 translate-y-0'
+      )}
+    >
+      <Link href={`/courses/${course.slug}`} className="block group cursor-pointer">
+        <article
+          className="bg-white border border-[#E8E8E8] rounded-[10px] overflow-hidden flex flex-col hover:border-[#C4A882] hover:shadow-md transition-colors"
+          style={{ height: 299, maxWidth: 392 }}
         >
-          <Link href={`/courses/${course.slug}`}>
-            Подробнее <ArrowRight size={14} />
-          </Link>
-        </Button>
-      </div>
-    </article>
+          {/* Top section: title at top:42px + illustration */}
+          <div className="relative flex-1 overflow-hidden">
+            {/* Title — positioned at top:42px from card top, height:65px */}
+            <div
+              className="absolute left-5 right-0 overflow-hidden"
+              style={{ top: 42, height: 65, paddingRight: course.imageUrl ? 164 : 20 }}
+            >
+              <h3
+                className="font-medium text-[#1A1A1A] text-[15px] leading-snug line-clamp-3"
+                style={{ fontFamily: 'var(--font-muller)' }}
+              >
+                {course.title}
+              </h3>
+            </div>
+
+            {/* Illustration — right side, vertically centered */}
+            {course.imageUrl && (
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                style={{ width: 148, height: 148 }}
+              >
+                <Image
+                  src={course.imageUrl}
+                  alt=""
+                  fill
+                  sizes="148px"
+                  className="object-contain"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Divider */}
+          <div className="border-t border-[#EBEBEB]" />
+
+          {/* Bottom: badges + pricing */}
+          <div className="px-5 py-4 space-y-2.5">
+            <div className="flex gap-1.5 flex-wrap">
+              {diploma && (
+                <span
+                  className="inline-flex items-center gap-1 rounded-full px-3 py-[3px]"
+                  style={{
+                    border: '1px solid #2E1700',
+                    fontFamily: 'var(--font-muller)',
+                    fontWeight: 400,
+                    fontSize: 16,
+                    lineHeight: 1,
+                    letterSpacing: 0,
+                    color: '#2E1700',
+                  }}
+                >
+                  <Check size={11} strokeWidth={2.5} />
+                  {diploma}
+                </span>
+              )}
+              {rest.map(badge => (
+                <span
+                  key={badge}
+                  className="inline-flex items-center rounded-full px-3 py-[3px]"
+                  style={{
+                    border: '1px solid #2E1700',
+                    fontFamily: 'var(--font-muller)',
+                    fontWeight: 400,
+                    fontSize: 16,
+                    lineHeight: 1,
+                    letterSpacing: 0,
+                    color: '#2E1700',
+                  }}
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+
+            {course.options.map((opt, i) => (
+              <div key={i} className="flex justify-between items-center">
+                <span className="text-[13px] text-[#555]">{opt.duration}</span>
+                <span className="text-[13px] font-medium text-[#1A1A1A]">{opt.price}</span>
+              </div>
+            ))}
+          </div>
+        </article>
+      </Link>
+    </div>
   )
 }
 
 interface CoursesSectionProps {
-  courses: Course[]
   title?: string
-  subtitle?: string
 }
 
-export function CoursesSection({ courses, title = 'Наши программы', subtitle }: CoursesSectionProps) {
-  const [activeFilter, setActiveFilter] = useState('Все')
+export function CoursesSection({ title = 'Выберите цель прохождения курсов:' }: CoursesSectionProps) {
+  const [activeFilter, setActiveFilter] = useState('Все курсы')
+  const filtersRef = useRef<HTMLDivElement>(null)
+  const [filtersVisible, setFiltersVisible] = useState(false)
 
-  const filtered = activeFilter === 'Все'
-    ? courses
-    : courses.filter(c =>
-        c.teacher?.specialization.toLowerCase().includes(activeFilter.toLowerCase())
-      )
+  useEffect(() => {
+    const el = filtersRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setFiltersVisible(true) },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  // Split into rows of 3 for the grid
+  const firstRow = GOAL_COURSES.slice(0, 3)
+  const secondRow = GOAL_COURSES.slice(3)
 
   return (
-    <section className="section-py bg-[#F5F0E8]">
+    <section className="section-py bg-[#F4F3EF]">
       <div className="container-site">
-        <div className="text-center mb-10">
-          <p className="text-sm font-medium text-[#9B6B4E] uppercase tracking-widest mb-3">
-            Образование
-          </p>
-          <h2 className="font-serif text-4xl md:text-5xl text-[#3D1F0E] text-balance mb-4">
+        <div className="mb-10">
+          <h2 className="font-serif text-4xl md:text-5xl text-[#2E1700] text-balance mb-8">
             {title}
           </h2>
-          {subtitle && (
-            <p className="text-[#9B6B4E] max-w-xl mx-auto">{subtitle}</p>
-          )}
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
+        <div
+          ref={filtersRef}
+          className={cn(
+            'flex flex-wrap gap-2 mb-10 transition-all duration-700 ease-out',
+            filtersVisible
+              ? 'opacity-100 translate-y-0 blur-0'
+              : 'opacity-0 translate-y-5 blur-sm'
+          )}
+        >
           {filters.map(f => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
               className={cn(
-                'px-4 py-2 rounded-full text-sm transition-colors border',
+                'px-5 py-2.5 rounded-full text-sm font-medium transition-colors border',
                 activeFilter === f
-                  ? 'bg-[#3D1F0E] text-[#F5F0E8] border-[#3D1F0E]'
-                  : 'bg-white text-[#9B6B4E] border-[#E8DFD0] hover:border-[#C4A882]'
+                  ? 'bg-[#5B3E2B] text-[#F4F3EF] border-[#5B3E2B]'
+                  : 'bg-white text-[#2E1700] border-[#E8DFD0] hover:border-[#C4A882]'
               )}
             >
               {f}
@@ -135,17 +283,24 @@ export function CoursesSection({ courses, title = 'Наши программы',
           ))}
         </div>
 
-        {filtered.length === 0 ? (
-          <div className="text-center py-16 text-[#9B6B4E]">
-            <p>Курсы по выбранному фильтру не найдены</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map(course => (
-              <CourseCard key={course.id} course={course} />
-            ))}
-          </div>
-        )}
+        {/* Row 1 — no animation */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          {firstRow.map(course => (
+            <GoalCard key={course.id} course={course} animated={false} />
+          ))}
+        </div>
+
+        {/* Row 2 — blur-reveal animation with stagger */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {secondRow.map((course, i) => (
+            <GoalCard
+              key={course.id}
+              course={course}
+              animated={true}
+              animationDelay={i * 120}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )
