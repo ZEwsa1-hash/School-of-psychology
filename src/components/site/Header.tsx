@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Menu, Search } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -17,14 +17,14 @@ export function Header() {
   return (
     <header className="bg-[#F4F3EF] pt-[42px] pb-[15px]">
       <div className="container-site">
-      <div className="flex items-center py-3 px-4 gap-4 border border-[#5B3E2B] rounded-[10px] bg-[#F4F3EF] max-w-[1280px] h-[65px] mx-auto">
+      <div className="flex items-center py-3 px-5 gap-4 border border-[#5B3E2B] rounded-[10px] bg-[#F4F3EF] max-w-[1280px] h-[76px] mx-auto">
         {/* Logo */}
         <Link href="/" className="shrink-0">
           <Image
             src="/assets/logo-decor.png"
             alt="Академия психологии"
-            width={48}
-            height={48}
+            width={62}
+            height={62}
             className="object-contain"
           />
         </Link>
@@ -32,7 +32,7 @@ export function Header() {
         {/* Phone — center */}
         <a
           href={`tel:${siteConfig.contacts.phone.replace(/\D/g, '')}`}
-          className="hidden lg:block text-sm font-medium text-[#2E1700] hover:text-[#5B3E2B] transition-colors flex-1 text-center"
+          className="hidden lg:block ml-3 mr-auto text-sm font-medium text-[#2E1700] hover:text-[#5B3E2B] transition-colors text-left"
         >
           {siteConfig.contacts.phone}
         </a>
@@ -41,9 +41,18 @@ export function Header() {
         <div className="hidden lg:flex items-center gap-3 shrink-0 ml-auto">
           <button
             aria-label="Поиск"
-            className="p-2 text-[#2E1700] hover:text-[#5B3E2B] transition-colors"
+            className="flex size-[35px] items-center justify-center text-[#2E1700] hover:text-[#5B3E2B] transition-colors"
           >
-            <Search size={20} />
+            <svg
+              viewBox="0 0 35 35"
+              className="size-[35px]"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <circle cx="14" cy="14" r="8" stroke="currentColor" strokeWidth="2.2" />
+              <path d="M20.5 20.5L30 30" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+            </svg>
           </button>
           <Button
             asChild

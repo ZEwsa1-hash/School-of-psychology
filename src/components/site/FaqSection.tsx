@@ -57,7 +57,7 @@ export function FaqSection() {
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent
-                  className="text-[#000000] leading-[100%] pb-4 mt-[7px] md:mt-0"
+                  className="text-[#2E1700] leading-[100%] pb-4 mt-[7px] md:mt-0"
                   style={{ fontFamily: 'var(--font-muller)', fontWeight: 400, fontSize: '16px' }}
                 >
                   {faq.answer}
