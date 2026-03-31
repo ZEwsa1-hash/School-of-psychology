@@ -31,7 +31,7 @@ export function AboutSection() {
           {/* [col 2, row 1] О нас */}
           <div style={{ gridColumn: 2, gridRow: 1 }}>
             <h2 className="font-serif text-4xl text-[#2E1700] mb-6">О нас</h2>
-            <div className="space-y-4 text-[#2E1700] text-base leading-relaxed text-justify">
+            <div className="space-y-4 text-[#2E1700] text-base leading-relaxed text-justify" style={{ fontFamily: 'var(--font-muller)' }}>
               <p>
                 Мы&nbsp;&mdash; академия психологии, где знания сочетаются с практикой и реальными
                 инструментами для жизни.
@@ -69,8 +69,13 @@ export function AboutSection() {
           </div>
 
           {/* [col 1, row 3] Много практики */}
-          <div style={{ gridColumn: 1, gridRow: 3 }}>
-            <h4 className="font-bold text-[#2E1700] mb-2">Много практики</h4>
+          <div style={{ gridColumn: 1, gridRow: 3, fontFamily: 'var(--font-muller)' }}>
+            <h4
+              className="mb-2 text-[#2E1700] text-justify"
+              style={{ fontFamily: 'Muller-Trial', fontWeight: 700, fontSize: '20px', lineHeight: '100%' }}
+            >
+              Много практики
+            </h4>
             <p className="text-sm text-[#2E1700] leading-relaxed text-justify">
               Мы делаем упор на практику, а не на сухую теорию&nbsp;&mdash; вы сразу учитесь
               применять знания в реальных ситуациях.
@@ -78,8 +83,13 @@ export function AboutSection() {
           </div>
 
           {/* [col 2, row 3] Индивидуальный подход */}
-          <div style={{ gridColumn: 2, gridRow: 3 }}>
-            <h4 className="font-bold text-[#2E1700] mb-2">Индивидуальный подход</h4>
+          <div style={{ gridColumn: 2, gridRow: 3, fontFamily: 'var(--font-muller)' }}>
+            <h4
+              className="mb-2 text-[#2E1700] text-justify"
+              style={{ fontFamily: 'Muller-Trial', fontWeight: 700, fontSize: '20px', lineHeight: '100%' }}
+            >
+              Индивидуальный подход
+            </h4>
             <p className="text-sm text-[#2E1700] leading-relaxed text-justify">
               Мы сопровождаем вас на каждом этапе обучения и помогаем прийти к
               результату&nbsp;&mdash; будь то новая профессия или личные изменения.
@@ -103,7 +113,7 @@ export function AboutSection() {
           {/* 2. О нас text */}
           <div>
             <h2 className="font-serif text-2xl text-[#2E1700] mb-4">О нас</h2>
-            <div className="space-y-4 text-[#2E1700] text-base leading-relaxed">
+            <div className="space-y-4 text-[#2E1700] text-base leading-relaxed" style={{ fontFamily: 'var(--font-muller)' }}>
               <p>Мы&nbsp;&mdash; академия психологии, где знания сочетаются с практикой и реальными инструментами для жизни.</p>
               <p>Наша цель не просто дать теорию, а <strong>помочь вам</strong> лучше понять себя, научиться <strong>работать с людьми</strong> и применять психологию в повседневной жизни и карьере.</p>
               <p>Мы создаём комфортную и поддерживающую среду, в которой можно расти, задавать вопросы и постепенно приходить к уверенности в своих знаниях и навыках.</p>
@@ -125,13 +135,23 @@ export function AboutSection() {
           <div>
             <h2 className="font-serif text-2xl text-[#2E1700] mb-4">Почему выбирают нас</h2>
             <hr className="border-[#3D1F0E] mb-6" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6" style={{ fontFamily: 'var(--font-muller)' }}>
               <div>
-                <h4 className="font-bold text-[#2E1700] mb-2">Много практики</h4>
+                <h4
+                  className="mb-2 text-[#2E1700] text-justify"
+                  style={{ fontFamily: 'Muller-Trial', fontWeight: 700, fontSize: '20px', lineHeight: '100%' }}
+                >
+                  Много практики
+                </h4>
                 <p className="text-sm text-[#2E1700] leading-relaxed">Мы делаем упор на практику, а не на сухую теорию&nbsp;&mdash; вы сразу учитесь применять знания в реальных ситуациях.</p>
               </div>
               <div>
-                <h4 className="font-bold text-[#2E1700] mb-2">Индивидуальный подход</h4>
+                <h4
+                  className="mb-2 text-[#2E1700] text-justify"
+                  style={{ fontFamily: 'Muller-Trial', fontWeight: 700, fontSize: '20px', lineHeight: '100%' }}
+                >
+                  Индивидуальный подход
+                </h4>
                 <p className="text-sm text-[#2E1700] leading-relaxed">Мы сопровождаем вас на каждом этапе обучения и помогаем прийти к результату&nbsp;&mdash; будь то новая профессия или личные изменения.</p>
               </div>
             </div>

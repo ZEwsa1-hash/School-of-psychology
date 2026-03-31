@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { createContactRequest } from '@/app/actions/contact'
+import { cn } from '@/lib/utils'
 
 const schema = z.object({
   name: z.string().min(2, 'Введите имя'),
@@ -31,6 +32,9 @@ export function ContactForm() {
   })
 
   const consent = watch('consent')
+  const name = watch('name', '')
+  const phone = watch('phone', '')
+  const isFormReady = name.trim().length > 0 && phone.trim().length > 0
 
   const onSubmit = async (data: FormData) => {
     setLoading(true)
@@ -128,8 +132,13 @@ export function ContactForm() {
               {/* Submit button */}
               <button
                 type="submit"
-                disabled={loading}
-                className="w-full mt-6 h-12 bg-[#2E1700] hover:bg-[#6B3A25] text-white rounded-[10px] text-base font-medium transition-colors disabled:opacity-60"
+                disabled={loading || !isFormReady}
+                className={cn(
+                  'w-full mt-6 h-12 text-white rounded-[10px] text-base font-medium transition-colors',
+                  isFormReady
+                    ? 'bg-[#5B3E2B] hover:bg-[#2E1700]'
+                    : 'bg-[#B8B8B8] cursor-not-allowed'
+                )}
               >
                 {loading ? 'Отправка...' : 'Оставить заявку'}
               </button>

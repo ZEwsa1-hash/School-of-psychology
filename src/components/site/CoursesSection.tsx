@@ -139,12 +139,9 @@ function GoalCard({ course, animationDelay = 0, animated = false }: GoalCardProp
           style={{ maxWidth: 392 }}
         >
           {/* Top section: title at top:42px + illustration */}
-          <div className="relative flex-1 overflow-hidden">
+          <div className="flex flex-1 flex-col items-center overflow-hidden px-5 pt-8 pb-4 text-center">
             {/* Title — positioned at top:42px from card top, height:65px */}
-            <div
-              className="absolute left-5 right-0 overflow-hidden"
-              style={{ top: 42, height: 65, paddingRight: course.imageUrl ? 164 : 20 }}
-            >
+            <div className="w-full overflow-hidden min-h-[65px]">
               <h3
                 className="font-medium text-[#1A1A1A] text-[15px] leading-snug line-clamp-3"
                 style={{ fontFamily: 'var(--font-muller)' }}
@@ -155,14 +152,14 @@ function GoalCard({ course, animationDelay = 0, animated = false }: GoalCardProp
 
             {/* Illustration — right side, vertically centered */}
             {course.imageUrl && (
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
-                style={{ width: 148, height: 148 }}
+              <div
+                className="relative mt-4 pointer-events-none mx-auto h-[104px] w-[132px] max-w-[132px] lg:h-[124px] lg:w-[152px] lg:max-w-[152px]"
               >
                 <Image
                   src={course.imageUrl}
                   alt=""
                   fill
-                  sizes="148px"
+                  sizes="(max-width: 1023px) 132px, 152px"
                   className="object-contain"
                 />
               </div>
@@ -272,10 +269,10 @@ export function CoursesSection({ title = 'Выберите цель прохож
               key={f}
               onClick={() => setActiveFilter(f)}
               className={cn(
-                'flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-colors border',
+                'flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-colors border bg-transparent',
                 activeFilter === f
-                  ? 'bg-[#2E1700] text-[#F4F3EF] border-[#2E1700]'
-                  : 'bg-white text-[#2E1700] border-[#E8DFD0] hover:border-[#C4A882]'
+                  ? 'bg-[#5B3E2B] text-[#F4F3EF] border-[#5B3E2B]'
+                  : 'text-[#2E1700] border-[#E8DFD0] hover:border-[#C4A882]'
               )}
             >
               {f}
