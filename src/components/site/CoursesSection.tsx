@@ -271,6 +271,30 @@ export function CoursesSection({ title = 'Выберите цель прохож
     setTooltipPosition(null)
   }
 
+  function toggleFilterTooltip(filter: string) {
+    if (hoveredFilter === filter) {
+      hideFilterTooltip(filter)
+    } else {
+      showFilterTooltip(filter)
+    }
+  }
+
+  // Close tooltip on outside touch (mobile)
+  useEffect(() => {
+    if (!hoveredFilter) return
+
+    function handleTouchOutside(e: TouchEvent) {
+      const wrapper = filtersWrapRef.current
+      if (wrapper && !wrapper.contains(e.target as Node)) {
+        setHoveredFilter(null)
+        setTooltipPosition(null)
+      }
+    }
+
+    document.addEventListener('touchstart', handleTouchOutside)
+    return () => document.removeEventListener('touchstart', handleTouchOutside)
+  }, [hoveredFilter])
+
   const displayedCourses = normalizedSearchQuery
     ? GOAL_COURSES.filter(course => {
         const haystack = [course.title, course.badges.join(' '), ...course.options.map(option => option.duration)]
@@ -312,6 +336,7 @@ export function CoursesSection({ title = 'Выберите цель прохож
                 className="flex-shrink-0"
                 onMouseEnter={() => showFilterTooltip(f)}
                 onMouseLeave={() => hideFilterTooltip(f)}
+                onTouchStart={() => toggleFilterTooltip(f)}
               >
                 <button
                   ref={node => {
