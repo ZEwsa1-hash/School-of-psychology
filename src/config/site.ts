@@ -3,7 +3,7 @@ export const siteConfig = {
   description: 'Профессиональное образование в области психологии',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000',
   contacts: {
-    phone: '+7 (999) 000-00-00',
+    phone: '+ 375 29 987 65 43',
     email: 'info@school-psychology.ru',
     address: 'г. Москва, ул. Примерная, д. 1',
   },

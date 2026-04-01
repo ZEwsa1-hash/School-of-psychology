@@ -65,7 +65,7 @@ export function ContactForm() {
   return (
     <section className="py-16 md:py-24 bg-[#F4F3EF]">
       <div className="container-site max-w-[1440px]">
-        <div className="flex flex-col md:flex-row gap-[34px] md:gap-6 items-stretch">
+        <div className="flex flex-col md:flex-row gap-[34px] md:gap-[108px] items-stretch md:items-start">
 
           {/* Left block — image (hidden on mobile) */}
           <div className="hidden md:block w-full md:max-w-[542px] md:flex-shrink-0">
@@ -82,10 +82,10 @@ export function ContactForm() {
 
           {/* Right block — form card */}
           <div
-            className="flex-1 h-[329px] md:h-auto md:min-h-[433px] rounded-[20px] bg-white px-10 py-10 flex flex-col justify-center"
+            className="flex-1 md:flex-none h-[329px] md:w-[626px] md:h-[433px] md:min-h-[433px] rounded-[20px] bg-white px-[25px] py-[25px] flex flex-col justify-start"
             style={{ boxShadow: '0px 4px 32.2px 0px #00000040' }}
           >
-            <h2 className="font-serif text-[32px] md:text-[40px] leading-tight text-[#2E1700] mb-6">
+            <h2 className="font-serif text-[32px] md:text-[40px] leading-tight text-[#2E1700] mb-6 md:w-[340px] md:min-h-[72px]">
               Нужна помощь в подборе курса?
             </h2>
 
@@ -95,7 +95,7 @@ export function ContactForm() {
                 type="text"
                 placeholder="Имя"
                 {...register('name')}
-                className="w-full bg-[#F4F3EF] border border-[#E8DFD0] rounded-[10px] px-4 py-3 text-[#2E1700] placeholder-[#2E1700]/40 outline-none focus:border-[#2E1700] transition-colors"
+                className="w-full bg-[#EAEAEA] border border-[#E8DFD0] rounded-[10px] px-4 py-3 text-[#2E1700] placeholder-[#2E1700]/40 outline-none focus:border-[#2E1700] transition-colors"
               />
               {errors.name && (
                 <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>
@@ -106,7 +106,7 @@ export function ContactForm() {
                 type="tel"
                 placeholder="+ 375 (00) 000 00 00"
                 {...register('phone')}
-                className="w-full bg-[#F4F3EF] border border-[#E8DFD0] rounded-[10px] px-4 py-3 text-[#2E1700] placeholder-[#2E1700]/40 outline-none focus:border-[#2E1700] transition-colors mt-3"
+                className="w-full bg-[#EAEAEA] border border-[#E8DFD0] rounded-[10px] px-4 py-3 text-[#2E1700] placeholder-[#2E1700]/40 outline-none focus:border-[#2E1700] transition-colors mt-3"
               />
               {errors.phone && (
                 <p className="text-sm text-red-500 mt-1">{errors.phone.message}</p>

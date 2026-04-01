@@ -29,46 +29,49 @@ function TeacherCard({ teacher }: { teacher: Teacher }) {
         )}
       </div>
 
-      {/* Name + link */}
-      <div className="flex items-baseline justify-between gap-2 mb-1">
+      {/* Name */}
+      <div className="mb-1">
         <h3
           style={{
             fontFamily: 'var(--font-muller)',
             fontWeight: 500,
             fontSize: '20px',
-            lineHeight: 1,
+            lineHeight: 1.15,
             letterSpacing: 0,
             color: '#1a1a1a',
           }}
         >
           {teacher.name}
         </h3>
+      </div>
+
+      {/* Specialization + link on one line with a fixed gap */}
+      <div className="flex min-w-0 items-center gap-[10px]">
+        <p
+          style={{
+            fontFamily: 'var(--font-muller)',
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: 1.2,
+            letterSpacing: 0,
+            color: '#6b6b6b',
+          }}
+          className="min-w-0 flex-1 truncate"
+        >
+          {teacher.specialization}
+        </p>
         <span
           style={{
             fontFamily: 'var(--font-muller)',
             fontWeight: 400,
             fontSize: '16px',
-            lineHeight: 1,
+            lineHeight: 1.2,
           }}
-          className="text-[#9B6B4E] whitespace-nowrap shrink-0 cursor-pointer hover:underline"
+          className="shrink-0 text-[#7A7A7A] cursor-pointer hover:underline"
         >
           ещё...
         </span>
       </div>
-
-      {/* Specialization */}
-      <p
-        style={{
-          fontFamily: 'var(--font-muller)',
-          fontWeight: 400,
-          fontSize: '16px',
-          lineHeight: 1,
-          letterSpacing: 0,
-          color: '#6b6b6b',
-        }}
-      >
-        {teacher.specialization}
-      </p>
     </article>
   )
 }
@@ -79,9 +82,12 @@ interface TeachersSectionProps {
 
 export function TeachersSection({ teachers }: TeachersSectionProps) {
   return (
-    <section className="section-py bg-white">
+    <section className="section-py bg-[#F4F3EF]">
       <div className="container-site">
-        <h2 className="font-serif text-4xl md:text-5xl text-[#1a1a1a] mb-10">
+        <h2
+          className="text-4xl md:text-5xl text-[#1a1a1a] mb-10"
+          style={{ fontFamily: 'var(--font-muller)' }}
+        >
           Преподаватели
         </h2>
 

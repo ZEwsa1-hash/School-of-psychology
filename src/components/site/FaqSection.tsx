@@ -51,14 +51,14 @@ export function FaqSection() {
                 style={{ boxShadow: '0px 4px 17px 0px #00000040' }}
               >
                 <AccordionTrigger
-                  className="text-left text-[#2E1700] hover:no-underline min-h-[49px] md:min-h-[44px] py-0 leading-[100%] tracking-[0%] data-[state=open]:text-[#000000] data-[state=open]:text-[13px] [&[data-state=open]>svg]:text-[#6B3A25]"
+                  className="items-center text-left text-[#2E1700] hover:no-underline min-h-[49px] md:min-h-[44px] py-3 leading-[100%] tracking-[0%] data-[state=open]:text-[#000000] data-[state=open]:text-[13px] [&>span]:block [&>span]:max-w-[calc(100%-40px)] [&[data-state=open]>svg]:text-[#6B3A25] [&>svg]:shrink-0"
                   style={{ fontFamily: 'var(--font-muller)', fontWeight: 400, fontSize: '16px' }}
                 >
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent
-                  className="text-[#2E1700] leading-[100%] pb-4 mt-[7px] md:mt-0"
-                  style={{ fontFamily: 'var(--font-muller)', fontWeight: 400, fontSize: '16px' }}
+                  className="pr-2 text-[#A27D67] leading-[100%] pb-4 mt-[7px] md:mt-0 md:max-w-[calc(100%-40px)] md:pr-10"
+                  style={{ fontFamily: 'var(--font-muller)', fontWeight: 400, fontSize: '14px' }}
                 >
                   {faq.answer}
                 </AccordionContent>
