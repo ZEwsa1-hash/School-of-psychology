@@ -1,4 +1,7 @@
+import { Suspense } from 'react'
+
 import type { Metadata } from 'next'
+
 import { CoursesSection } from '@/components/site/CoursesSection'
 
 export const metadata: Metadata = {
@@ -9,7 +12,9 @@ export const metadata: Metadata = {
 export default function CoursesPage() {
   return (
     <div className="pt-2">
-      <CoursesSection title="Все программы" />
+      <Suspense>
+        <CoursesSection title="Все программы" />
+      </Suspense>
     </div>
   )
 }

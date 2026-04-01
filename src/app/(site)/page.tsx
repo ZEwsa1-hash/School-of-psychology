@@ -1,6 +1,9 @@
 export const dynamic = 'force-dynamic'
 
+import { Suspense } from 'react'
+
 import type { Metadata } from 'next'
+
 import { prisma } from '@/lib/prisma'
 import { HeroSection } from '@/components/site/HeroSection'
 import { CoursesSection } from '@/components/site/CoursesSection'
@@ -23,7 +26,9 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection />
-      <CoursesSection />
+      <Suspense>
+        <CoursesSection />
+      </Suspense>
       <AboutSection />
       <TeachersSection teachers={teachers} />
       <CertificatesSection />
