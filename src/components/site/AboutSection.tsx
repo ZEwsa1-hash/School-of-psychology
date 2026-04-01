@@ -2,21 +2,18 @@ import Image from 'next/image'
 
 export function AboutSection() {
   return (
-    <section className="section-py bg-white">
+    <section className="section-py bg-[#F4F3EF]">
       <div className="container-site">
-
-        {/* ── Desktop: 3 cols × 3 rows ── */}
         <div
-          className="hidden lg:grid gap-x-10"
+          className="hidden gap-x-10 lg:grid"
           style={{
             gridTemplateColumns: '362px 1fr 362px',
             gridTemplateRows: 'auto auto auto',
             rowGap: '32px',
           }}
         >
-          {/* [col 1, row 1] Left photo 362×365 */}
           <div
-            className="relative rounded-[20px] overflow-hidden"
+            className="relative overflow-hidden rounded-[20px]"
             style={{ gridColumn: 1, gridRow: 1, height: 365 }}
           >
             <Image
@@ -28,18 +25,25 @@ export function AboutSection() {
             />
           </div>
 
-          {/* [col 2, row 1] О нас */}
           <div style={{ gridColumn: 2, gridRow: 1 }}>
-            <h2 className="font-serif text-4xl text-[#2E1700] mb-6">О нас</h2>
-            <div className="space-y-4 text-[#2E1700] text-base leading-relaxed text-justify" style={{ fontFamily: 'var(--font-muller)' }}>
+            <h2
+              className="mb-6 text-4xl text-[#2E1700]"
+              style={{ fontFamily: 'var(--font-muller)', fontWeight: 400 }}
+            >
+              О нас
+            </h2>
+            <div
+              className="space-y-4 text-base leading-relaxed text-[#2E1700] text-justify"
+              style={{ fontFamily: 'var(--font-muller)', fontWeight: 400 }}
+            >
               <p>
-                Мы&nbsp;&mdash; академия психологии, где знания сочетаются с практикой и реальными
+                Мы — академия психологии, где знания сочетаются с практикой и реальными
                 инструментами для жизни.
               </p>
               <p>
-                Наша цель не просто дать теорию, а <strong>помочь вам</strong> лучше понять себя,
-                научиться <strong>работать с людьми</strong> и применять психологию в повседневной
-                жизни и карьере.
+                Наша цель не просто дать теорию, а <strong>помочь вам</strong> лучше понять
+                себя, научиться <strong>работать с людьми</strong> и применять психологию в
+                повседневной жизни и карьере.
               </p>
               <p>
                 Мы создаём комфортную и поддерживающую среду, в которой можно расти, задавать
@@ -48,9 +52,8 @@ export function AboutSection() {
             </div>
           </div>
 
-          {/* [col 3, rows 1–3] Right photo 362×576 */}
           <div
-            className="relative rounded-[20px] overflow-hidden"
+            className="relative overflow-hidden rounded-[20px]"
             style={{ gridColumn: 3, gridRow: '1 / 4', height: 576 }}
           >
             <Image
@@ -62,45 +65,45 @@ export function AboutSection() {
             />
           </div>
 
-          {/* [col 1–2, row 2] Почему выбирают нас — heading + divider */}
           <div style={{ gridColumn: '1 / 3', gridRow: 2 }}>
-            <h2 className="font-serif text-4xl text-[#2E1700] mb-4">Почему выбирают нас</h2>
+            <h2
+              className="mb-4 text-4xl text-[#2E1700]"
+              style={{ fontFamily: 'var(--font-muller)', fontWeight: 400 }}
+            >
+              Почему выбирают нас
+            </h2>
             <hr className="border-[#3D1F0E]" />
           </div>
 
-          {/* [col 1, row 3] Много практики */}
           <div style={{ gridColumn: 1, gridRow: 3, fontFamily: 'var(--font-muller)' }}>
             <h4
-              className="mb-2 text-[#2E1700] text-justify"
-              style={{ fontFamily: 'Muller-Trial', fontWeight: 700, fontSize: '20px', lineHeight: '100%' }}
+              className="mb-2 text-[20px] leading-none text-[#2E1700] text-justify"
+              style={{ fontFamily: 'var(--font-muller)', fontWeight: 700 }}
             >
               Много практики
             </h4>
-            <p className="text-sm text-[#2E1700] leading-relaxed text-justify">
-              Мы делаем упор на практику, а не на сухую теорию&nbsp;&mdash; вы сразу учитесь
-              применять знания в реальных ситуациях.
+            <p className="text-sm leading-relaxed text-[#2E1700] text-justify">
+              Мы делаем упор на практику, а не на сухую теорию — вы сразу учитесь применять
+              знания в реальных ситуациях.
             </p>
           </div>
 
-          {/* [col 2, row 3] Индивидуальный подход */}
           <div style={{ gridColumn: 2, gridRow: 3, fontFamily: 'var(--font-muller)' }}>
             <h4
-              className="mb-2 text-[#2E1700] text-justify"
-              style={{ fontFamily: 'Muller-Trial', fontWeight: 700, fontSize: '20px', lineHeight: '100%' }}
+              className="mb-2 text-[20px] leading-none text-[#2E1700] text-justify"
+              style={{ fontFamily: 'var(--font-muller)', fontWeight: 700 }}
             >
               Индивидуальный подход
             </h4>
-            <p className="text-sm text-[#2E1700] leading-relaxed text-justify">
-              Мы сопровождаем вас на каждом этапе обучения и помогаем прийти к
-              результату&nbsp;&mdash; будь то новая профессия или личные изменения.
+            <p className="text-sm leading-relaxed text-[#2E1700] text-justify">
+              Мы сопровождаем вас на каждом этапе обучения и помогаем прийти к результату —
+              будь то новая профессия или личные изменения.
             </p>
           </div>
         </div>
 
-        {/* ── Mobile: vertical stack ── */}
-        <div className="lg:hidden flex flex-col gap-8">
-          {/* 1. Building image: 350×343 */}
-          <div className="relative w-full h-[343px] rounded-[20px] overflow-hidden">
+        <div className="flex flex-col gap-8 lg:hidden">
+          <div className="relative h-[343px] w-full overflow-hidden rounded-[20px]">
             <Image
               src="/assets/about-building.png"
               alt="Кафедра психологии"
@@ -110,18 +113,34 @@ export function AboutSection() {
             />
           </div>
 
-          {/* 2. О нас text */}
           <div>
-            <h2 className="font-serif text-2xl text-[#2E1700] mb-4">О нас</h2>
-            <div className="space-y-4 text-[#2E1700] text-base leading-relaxed" style={{ fontFamily: 'var(--font-muller)' }}>
-              <p>Мы&nbsp;&mdash; академия психологии, где знания сочетаются с практикой и реальными инструментами для жизни.</p>
-              <p>Наша цель не просто дать теорию, а <strong>помочь вам</strong> лучше понять себя, научиться <strong>работать с людьми</strong> и применять психологию в повседневной жизни и карьере.</p>
-              <p>Мы создаём комфортную и поддерживающую среду, в которой можно расти, задавать вопросы и постепенно приходить к уверенности в своих знаниях и навыках.</p>
+            <h2
+              className="mb-4 text-2xl text-[#2E1700]"
+              style={{ fontFamily: 'var(--font-muller)', fontWeight: 400 }}
+            >
+              О нас
+            </h2>
+            <div
+              className="space-y-4 text-base leading-relaxed text-[#2E1700]"
+              style={{ fontFamily: 'var(--font-muller)', fontWeight: 400 }}
+            >
+              <p>
+                Мы — академия психологии, где знания сочетаются с практикой и реальными
+                инструментами для жизни.
+              </p>
+              <p>
+                Наша цель не просто дать теорию, а <strong>помочь вам</strong> лучше понять
+                себя, научиться <strong>работать с людьми</strong> и применять психологию в
+                повседневной жизни и карьере.
+              </p>
+              <p>
+                Мы создаём комфортную и поддерживающую среду, в которой можно расти, задавать
+                вопросы и постепенно приходить к уверенности в своих знаниях и навыках.
+              </p>
             </div>
           </div>
 
-          {/* 3. Lecture image: 210×349, right-aligned */}
-          <div className="relative h-[349px] w-[210px] rounded-[20px] overflow-hidden ml-auto">
+          <div className="relative ml-auto h-[349px] w-[210px] overflow-hidden rounded-[20px]">
             <Image
               src="/assets/about-lecture.jpg"
               alt="Лекционный зал"
@@ -131,33 +150,45 @@ export function AboutSection() {
             />
           </div>
 
-          {/* 4. Почему выбирают нас */}
           <div>
-            <h2 className="font-serif text-2xl text-[#2E1700] mb-4">Почему выбирают нас</h2>
-            <hr className="border-[#3D1F0E] mb-6" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6" style={{ fontFamily: 'var(--font-muller)' }}>
+            <h2
+              className="mb-4 text-2xl text-[#2E1700]"
+              style={{ fontFamily: 'var(--font-muller)', fontWeight: 400 }}
+            >
+              Почему выбирают нас
+            </h2>
+            <hr className="mb-6 border-[#3D1F0E]" />
+            <div
+              className="grid grid-cols-1 gap-6 sm:grid-cols-2"
+              style={{ fontFamily: 'var(--font-muller)' }}
+            >
               <div>
                 <h4
-                  className="mb-2 text-[#2E1700] text-justify"
-                  style={{ fontFamily: 'Muller-Trial', fontWeight: 700, fontSize: '20px', lineHeight: '100%' }}
+                  className="mb-2 text-[20px] leading-none text-[#2E1700] text-justify"
+                  style={{ fontWeight: 700 }}
                 >
                   Много практики
                 </h4>
-                <p className="text-sm text-[#2E1700] leading-relaxed">Мы делаем упор на практику, а не на сухую теорию&nbsp;&mdash; вы сразу учитесь применять знания в реальных ситуациях.</p>
+                <p className="text-sm leading-relaxed text-[#2E1700]">
+                  Мы делаем упор на практику, а не на сухую теорию — вы сразу учитесь применять
+                  знания в реальных ситуациях.
+                </p>
               </div>
               <div>
                 <h4
-                  className="mb-2 text-[#2E1700] text-justify"
-                  style={{ fontFamily: 'Muller-Trial', fontWeight: 700, fontSize: '20px', lineHeight: '100%' }}
+                  className="mb-2 text-[20px] leading-none text-[#2E1700] text-justify"
+                  style={{ fontWeight: 700 }}
                 >
                   Индивидуальный подход
                 </h4>
-                <p className="text-sm text-[#2E1700] leading-relaxed">Мы сопровождаем вас на каждом этапе обучения и помогаем прийти к результату&nbsp;&mdash; будь то новая профессия или личные изменения.</p>
+                <p className="text-sm leading-relaxed text-[#2E1700]">
+                  Мы сопровождаем вас на каждом этапе обучения и помогаем прийти к результату —
+                  будь то новая профессия или личные изменения.
+                </p>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   )
